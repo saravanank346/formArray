@@ -1,0 +1,106 @@
+<form [formGroup]="userform" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        name="text"
+        pInputText
+        formControlName="name"
+        placeholder="name"
+      />
+      <div
+      *ngIf="
+        userform.controls['name'].invalid &&
+        (userform.controls['name'].touched || userform.controls['name'].dirty)
+      "
+    >
+      <span *ngIf="userform.controls['name'].errors?.['required']"
+        >Name is Required</span
+      >
+      <span *ngIf="userform.controls['name'].errors?.['maxlength']"
+        >Maximum length Exced</span
+      >
+      <span *ngIf="userform.controls['name'].errors?.['pattern']"
+        >Invalid Name</span
+      >
+    </div>
+    </div>
+    <div class="form-group">
+      <label>email</label>
+      <input
+        name="text"
+        pInputText
+        placeholder="Enter email"
+        formControlName="email"
+      />
+      <div
+      *ngIf="
+        userform.controls['email'].invalid &&
+        (userform.controls['email'].touched ||
+          userform.controls['email'].dirty)
+      "
+    >
+      <span *ngIf="userform.controls['email'].errors?.['required']"
+        >Email is Required</span
+      >
+      <span *ngIf="userform.controls['email'].errors?.['pattern']"
+        >Invalid Email</span
+      >
+    </div>
+    </div>
+ 
+  
+    <ng-container formArrayName="addressdetials">
+      <button type="button" (click)="addAddress()">+ Add Address</button>
+      <div [formGroupName]="i" *ngFor="let a of addressdetials.controls; let i = index">
+        <div *ngIf="i < 5">
+       
+          <div>
+            <label>City</label>
+            <input id="city" type="text" formControlName="city">
+            
+            <div *ngIf="isCityInvalid(i)">City is required.
+            
+            </div>
+          </div>
+          <div>
+            <label>State</label>
+            <input id="state" type="text" formControlName="state">
+            <div *ngIf="isStateInvalid(i)">State is required.</div>
+          </div>
+          <button type="button" (click)="remove(i)">Remove</button>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- amount -->
+    <ng-container formArrayName="AmountDetials">
+      <button type="button" (click)="addAmount()">+ Add Amount</button>
+      <div [formGroupName]="i" *ngFor="let a of AmountDetials.controls; let i = index">
+        <div *ngIf="i < 5">
+       
+          <div>
+            <label>Amount</label>
+            <input id="city" type="text" formControlName="Amount">
+            <div ></div>
+            <!-- <div *ngIf="isCityInvalid(i)">Amountis required.
+            
+            </div> -->
+          </div>
+        </div>
+          
+      </div>
+    </ng-container>
+
+
+    <div>
+      <label>Total Amount</label>
+      <input id="state" type="text" formControlName="total_Amount">
+    </div>
+    <button>submit</button>
+    
+  </form>
+  <p>Sum of Amounts: {{ calculateSum() }}</p>
+  {{ userform.value | json}}
+  
+    
+  
