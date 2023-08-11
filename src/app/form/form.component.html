@@ -48,12 +48,11 @@
     </div>
     </div>
  
-  
+  <!-- form arrray -->
     <ng-container formArrayName="addressdetials">
       <button type="button" (click)="addAddress()">+ Add Address</button>
       <div [formGroupName]="i" *ngFor="let a of addressdetials.controls; let i = index">
         <div *ngIf="i < 5">
-       
           <div>
             <label>City</label>
             <input id="city" type="text" formControlName="city">
@@ -72,34 +71,11 @@
       </div>
     </ng-container>
 
-    <!-- amount -->
-    <ng-container formArrayName="AmountDetials">
-      <button type="button" (click)="addAmount()">+ Add Amount</button>
-      <div [formGroupName]="i" *ngFor="let a of AmountDetials.controls; let i = index">
-        <div *ngIf="i < 5">
-       
-          <div>
-            <label>Amount</label>
-            <input id="city" type="text" formControlName="Amount">
-            <div ></div>
-            <!-- <div *ngIf="isCityInvalid(i)">Amountis required.
-            
-            </div> -->
-          </div>
-        </div>
-          
-      </div>
-    </ng-container>
 
-
-    <div>
-      <label>Total Amount</label>
-      <input id="state" type="text" formControlName="total_Amount">
-    </div>
     <button>submit</button>
     
   </form>
-  <p>Sum of Amounts: {{ calculateSum() }}</p>
+  <!-- <p>Sum of Amounts: {{ calculateSum() }}</p> -->
   {{ userform.value | json}}
   
     

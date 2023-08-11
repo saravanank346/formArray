@@ -10,6 +10,7 @@ export class FormComponent {
 
    
   constructor(public fb:FormBuilder){}
+  
   sumAmount:any=""
   total_amt:any=""
   userform:FormGroup=this.fb.group({
@@ -33,36 +34,13 @@ export class FormComponent {
 
 
    
-   
-    AmountDetials:this.fb.array([
-      this.amountGroup(),
-      
-    ]),
-
-
-    total_Amount:this.fb.control("")
+  
     
 
   })
    
-  amountGroup(){
-    return this.fb.group({
-      Amount:this.fb.control("",{})
-      
-      
-    })
-    
-  }
-  // 
- 
-  // 
-  skillGroup(){
-    return  this.fb.group({
-      skill1:this.fb.control(""),
-      skill2:this.fb.control(""),
-      skill3:this.fb.control(""),
-    })
-  }
+
+  
   addressForm(){
     return this.fb.group({
       city:this.fb.control("",{
@@ -73,42 +51,7 @@ export class FormComponent {
       })
     })
   }
-  //// //////////////////////////////////////////////
  
- compareAmount(){
-  console.log("inside compareAmount")
-  console.log("sumAmount",this.sumAmount);
-  this.total_amt=this.total_Amount
-  console.log("totalAmount",this.total_amt)
-  if (this.sumAmount==this.total_amt) {
-    console.log("success");
-    console.log(this.userform.value)
-    alert(JSON.stringify(this.userform.value));
-  } else {
-    console.log("fail");
-  }
- }
-
-
-  /////////////////////////////////////////////////
-
-  get AmountDetials(){
-   
-    return this.userform.get('AmountDetials') as FormArray
-
-  }
-
-  addAmount(){
-    
-    this.AmountDetials.push(this.amountGroup())
-    this.sumAmount=this.calculateSum()
-    
-  }
-  get total_Amount(){
-
-    return this.userform.get("total_Amount")?.value
-  }
-
   get addressdetials() {
     return this.userform.get('addressdetials') as FormArray;
   }
@@ -116,17 +59,7 @@ export class FormComponent {
   addAddress() {
     this.addressdetials.push(this.addressForm());
   }
-  calculateSum(): number {
-    this.sumAmount=0
 
-    // Loop through the controls in the AmountDetials FormArray and calculate the sum
-    for (const control of this.AmountDetials.controls) {
-      const value = +control?.get('Amount')?.value // Convert the value to a number using the unary + operator
-      this.sumAmount += value;
-    }
-
-    return this.sumAmount;
-  }
   remove(index:any){
     this.addressdetials.removeAt(index)
   }
@@ -147,8 +80,8 @@ export class FormComponent {
       return this.userform.markAllAsTouched();
   
     }else{
-      console.log();
-      this.compareAmount()
+      console.log(this.userform.value);
+     
      
     }
   }
