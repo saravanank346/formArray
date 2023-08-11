@@ -10,9 +10,7 @@ export class FormComponent {
 
    
   constructor(public fb:FormBuilder){}
-  
-  sumAmount:any=""
-  total_amt:any=""
+  index:number=1;
   userform:FormGroup=this.fb.group({
     
     name:new FormControl("",{
